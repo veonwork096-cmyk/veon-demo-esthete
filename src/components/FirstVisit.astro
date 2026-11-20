@@ -1,0 +1,58 @@
+---
+import Section from "./Section.astro";
+import Icon from "./Icon.astro";
+import FutureLink from "./FutureLink.astro";
+import { phone, soon } from "../data/clinic";
+
+// Prices: veon/client.json C-007 (price page, 2026-11-20). No other figures.
+const route = [
+  { title: "Консультація", price: "1 000 грн", note: "Первинна або повторна, з лікарем клініки" },
+  { title: "Комплексна діагностика з планом лікування", price: "4 800 грн", note: "Обстеження, після якого у вас є план лікування" },
+  { title: "Лікування за планом", price: null, note: "Вартість — у вашому плані лікування" },
+];
+const more = [
+  { name: "Зняття гострого стану", price: "1 800 грн" },
+  { name: "Контрольний огляд", price: "550 грн" },
+  { name: "КПКТ, 1 щелепа", price: "1 200 грн" },
+  { name: "КПКТ, 2 щелепи", price: "1 600 грн" },
+];
+---
+<Section id="first-visit" class="section first-visit">
+  <div class="container first-visit__grid">
+    <div class="first-visit__lead">
+      <h2 class="first-visit__title">Скільки коштує почати</h2>
+      <p class="first-visit__price"><span class="first-visit__label">Консультація</span> <span class="first-visit__figure tnum">1 000 грн</span></p>
+      <div class="first-visit__actions">
+        <a class="btn btn--primary" href={phone.href} data-rec="R-301,R-404"><Icon name="phone" />Записатися за телефоном</a>
+        <FutureLink note={soon}>Весь прайс</FutureLink>
+      </div>
+    </div>
+
+    <div class="first-visit__side">
+      <ol class="route" role="list">
+        {route.map((step, i) => (
+          <li class:list={["route__step", i === 0 && "route__step--first"]}>
+            <span class="route__node" aria-hidden="true"></span>
+            <div class="route__text">
+              <h3 class="route__title">{step.title}</h3>
+              <p class="route__note">{step.note}</p>
+            </div>
+            {step.price ? <p class="route__price tnum">{step.price}</p> : <p class="route__price route__price--plan">за планом</p>}
+          </li>
+        ))}
+      </ol>
+
+      <table class="prices">
+        <caption class="prices__caption">Інші ціни з прайсу клініки</caption>
+        <tbody>
+          {more.map((row) => (
+            <tr>
+              <th scope="row">{row.name}</th>
+              <td class="tnum">{row.price}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</Section>

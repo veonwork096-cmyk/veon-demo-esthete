@@ -1,0 +1,38 @@
+---
+import Icon from "./Icon.astro";
+import { nav, phone, email, addresses, asset } from "../data/clinic";
+---
+<header class="site-header" data-header>
+  <div class="container site-header__row">
+    <a class="logo" href="#top" aria-label="ЕСТЕТ — інноваційний стоматологічний комплекс, на початок сторінки">
+      <picture>
+        <source type="image/webp" srcset={`${asset("/images/logo-768.webp")} 768w`} sizes="190px" />
+        <img src={asset("/images/logo-384.png")} srcset={`${asset("/images/logo-384.png")} 384w, ${asset("/images/logo-768.png")} 768w`} sizes="190px" alt="ЕСТЕТ — інноваційний стоматологічний комплекс" width="384" height="96" />
+      </picture>
+    </a>
+
+    <nav class="site-nav" aria-label="Головне меню" id="site-nav" data-rec="R-305,R-405">
+      <ul class="site-nav__list" role="list">
+        {nav.map((item) => (
+          <li><a class="site-nav__link" href={item.href} data-nav>{item.label}</a></li>
+        ))}
+      </ul>
+      <div class="site-nav__extra">
+        <a class="site-nav__contact" href={phone.href}><Icon name="phone" />{phone.label}</a>
+        <a class="site-nav__contact" href={email.href}><Icon name="mail" />{email.label}</a>
+        <p class="site-nav__addr">Ужгород: {addresses.map((a) => a.street).join(" і ")}</p>
+      </div>
+    </nav>
+
+    <div class="site-header__actions">
+      <a class="site-header__phone" href={phone.href}>{phone.label}</a>
+      <a class="btn btn--primary btn--sm site-header__cta" href={phone.href} data-rec="R-301,R-404,R-405">Записатися</a>
+      <a class="icon-btn site-header__call" href={phone.href} aria-label={`Подзвонити: ${phone.label}`} data-rec="R-301"><Icon name="phone" /></a>
+      <button class="icon-btn site-header__burger" type="button" aria-controls="site-nav" aria-expanded="false" data-menu-toggle>
+        <span class="icon-btn__open"><Icon name="menu" /></span>
+        <span class="icon-btn__close"><Icon name="close" /></span>
+        <span class="visually-hidden" data-menu-label>Відкрити меню</span>
+      </button>
+    </div>
+  </div>
+</header>

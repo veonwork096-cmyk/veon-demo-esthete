@@ -1,0 +1,115 @@
+/* Hallmark · shape: custom single page · genre: modern-minimal · theme: custom · job: book · idea: "Видно до деталі: the clinic works under magnification, so the page shows it the way the doctor sees a tooth in the microscope, large, sharp, in white light, through the brand lens made of the logo arcs" · vibe: "white light, precise, calm, human, indigo" · surface: absolute · posture: committed · copy: verbatim
+ * paper: #FFFFFF · accent: #3D5593 · display: Geologica · body: Golos Text · hero: H1 left on white, a large lens with the doctor at the microscope on the right breaking below the fold, a small lens with a veneer in tweezers overlapping it · nav: white sticky bar, logo left, six anchors, phone and one call button right, full-sheet menu on phones · footer: light footer, contacts column, clinic and documents as pages in development, three social icons, one copyright line · imagery: client photos · signature: the lens, the only round shape on the page, ringed by the logo's concentric arcs, always holding a sharp real detail of the clinic's work
+ * axes: white/Geologica/indigo · posture: committed · contrast: pass · fold: pass · v2.0.0 */
+/* Hallmark · pre-emit critique: P5 H4 E4 S5 R4 V4 · weakest: H, the hero carries two lenses and a trust line; kept the action row to one filled button and moved the second action to an outline */
+/* Hallmark · waive 7b · paper #FFFFFF with surface: absolute in the stamp, text and controls pass contrast · concept.md 5 picks white because the clinic's real interiors and lab photos are white, and the old site darkened them */
+/* Hallmark · waive 80 · the arcs are the ЕСТЕТ logo's own concentric arcs (C-014), drawn as class arcs around photo lenses · they are the client's identity element and frame real photos, not an illustration */
+/* Hallmark · waive 39b · main buttons 56px and small 48px as specified in concept.md 8.10 and 8.3 · the clinic's patients are often older adults on phones, so the call button keeps the larger 56px target the approved design system sets */
+/* Hallmark · dismissed 11 · the direction photos scale 1.03 inside a clipped frame on hover, the micro-feedback concept.md 8.5 approves, and reduced motion removes it */
+/* Hallmark · dismissed 42 · the footer is named in the stamp: light, contacts first, clinic and documents as pages in development, three social icons, as concept.md 5 decides */
+/* Hallmark · dismissed F4 · one filled primary recipe on white; the light button is the same action inverted on the single dark ЄС block, and the grey one is the inactive form button the demo rules require */
+/* Client design tokens from design/concept.md (veon-concept + 8.10). One system; no literal colours or fonts past this file. */
+@font-face {
+  font-family: "Geologica";
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url("/fonts/geologica-cyrillic-wght-normal.woff2") format("woff2");
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+@font-face {
+  font-family: "Geologica";
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url("/fonts/geologica-latin-wght-normal.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: "Golos Text";
+  font-style: normal;
+  font-weight: 400 900;
+  font-display: swap;
+  src: url("/fonts/golos-text-cyrillic-wght-normal.woff2") format("woff2");
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+@font-face {
+  font-family: "Golos Text";
+  font-style: normal;
+  font-weight: 400 900;
+  font-display: swap;
+  src: url("/fonts/golos-text-latin-wght-normal.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* Metric fallbacks: keep line boxes close to the web fonts while they load (CLS). */
+@font-face { font-family: "Geologica Fallback"; src: local("Arial"); size-adjust: 104%; ascent-override: 92%; descent-override: 24%; line-gap-override: 0%; }
+@font-face { font-family: "Golos Text Fallback"; src: local("Arial"); size-adjust: 101%; ascent-override: 94%; descent-override: 25%; line-gap-override: 0%; }
+
+:root {
+  /* colour roles (concept 8.10) */
+  --color-bg: #FFFFFF;
+  --color-surface: #EEF1F8;
+  --color-text: #151B33;
+  --color-muted: #5A6178;
+  --color-primary: #3D5593;
+  --color-primary-hover: #33497F;
+  --color-on-primary: #FFFFFF;
+  --color-graphic: #B8C4E1;
+  --color-inverse: #1E2A55;
+  --color-on-inverse: #FFFFFF;
+  --color-inverse-muted: #C9D2EA;
+  --color-plum: #8E517C;
+  --color-border: #DCE1EE;
+  --color-field: #7A84A3;
+  --color-accent: var(--color-primary);
+  --color-focus: var(--color-primary);
+  --color-focus-inverse: var(--color-graphic);
+
+  /* type */
+  --font-display: "Geologica", "Geologica Fallback", system-ui, sans-serif;
+  --font-body: "Golos Text", "Golos Text Fallback", system-ui, sans-serif;
+  --fs-small: 0.875rem;                                   /* 14 */
+  --fs-body: clamp(1.0625rem, 1.03rem + 0.12vw, 1.125rem); /* 17 -> 18 */
+  --fs-lead: clamp(1.0625rem, 0.98rem + 0.45vw, 1.375rem); /* 17 -> 22 */
+  --fs-h3: clamp(1.25rem, 1.08rem + 0.6vw, 1.75rem);       /* 20 -> 28 */
+  --fs-h2: clamp(2rem, 1.6rem + 1.6vw, 2.75rem);           /* 32 -> 44 */
+  --fs-display: clamp(2.25rem, 1.2rem + 4.4vw, 5.5rem);    /* 36 -> 88 */
+  --fs-figure: clamp(6rem, 3.6rem + 9vw, 12rem);           /* rating figure */
+  --lh-body: 1.55;
+  --lh-head: 1.1;
+  --lh-display: 1.02;
+  --tracking-display: -0.02em;
+
+  /* spacing: 4/8 step */
+  --s-1: 0.5rem;   /* 8 */
+  --s-2: 1rem;     /* 16 */
+  --s-3: 1.5rem;   /* 24 */
+  --s-4: 2rem;     /* 32 */
+  --s-5: 3rem;     /* 48 */
+  --s-6: 5rem;     /* 80 */
+  --s-7: 8rem;     /* 128 */
+  --section-y: clamp(5rem, 3.4rem + 5vw, 8rem);
+  --gutter: clamp(1.25rem, 1rem + 0.6vw, 1.5rem);
+  --gutter: 1.5rem;
+  --container: 1320px;
+
+  /* shape */
+  --radius: 4px;
+  --line: 1px;
+  --arc: 1.5px;
+  --control-h: 56px;
+  --control-h-sm: 48px;
+  --field-h: 52px;
+  --header-h: 72px;
+  --bar-h: 64px;
+
+  /* motion */
+  --ease-out: cubic-bezier(.2, .7, .2, 1);
+  --dur: 700ms;
+  --dur-fast: 150ms;
+  --dur-mid: 250ms;
+  --dur-focus: 900ms;
+}
+@media (max-width: 767px) {
+  :root { --header-h: 60px; --dur-focus: 600ms; --dur: 500ms; }
+}

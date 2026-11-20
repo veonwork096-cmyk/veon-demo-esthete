@@ -1,0 +1,64 @@
+---
+import Base from "../layouts/Base.astro";
+import Header from "../components/Header.astro";
+import Hero from "../components/Hero.astro";
+import Directions from "../components/Directions.astro";
+import FirstVisit from "../components/FirstVisit.astro";
+import Doctors from "../components/Doctors.astro";
+import Online from "../components/Online.astro";
+import Reviews from "../components/Reviews.astro";
+import Contacts from "../components/Contacts.astro";
+import Footer from "../components/Footer.astro";
+import CallBar from "../components/CallBar.astro";
+import { phone, email, addresses, socials } from "../data/clinic";
+
+const title = "Мікроскопна стоматологія та імплантація в Ужгороді | Естет";
+const description =
+  "Стоматологічний комплекс ЕСТЕТ в Ужгороді: мікроскоп, імплантація, вініри, лікування в медикаментозному сні, власна лабораторія. Консультація — 1 000 грн.";
+
+const hoursSpec = [
+  { "@type": "OpeningHoursSpecification", dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"], opens: "09:00", closes: "19:00" },
+  { "@type": "OpeningHoursSpecification", dayOfWeek: "Saturday", opens: "09:00", closes: "17:00" },
+];
+const place = (street: string) => ({
+  "@type": "PostalAddress",
+  streetAddress: street,
+  addressLocality: "Ужгород",
+  addressRegion: "Закарпатська область",
+  addressCountry: "UA",
+});
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Dentist",
+  name: "ЕСТЕТ інноваційний стоматологічний комплекс",
+  alternateName: "Естет",
+  telephone: phone.href.replace("tel:", ""),
+  email: email.label,
+  address: place(addresses[0].street),
+  openingHoursSpecification: hoursSpec,
+  priceRange: "Консультація 1 000 грн",
+  currenciesAccepted: "UAH",
+  sameAs: socials.map((s) => s.href),
+  department: addresses.map((a) => ({
+    "@type": "Dentist",
+    name: `ЕСТЕТ, ${a.street}`,
+    telephone: phone.href.replace("tel:", ""),
+    address: place(a.street),
+    openingHoursSpecification: hoursSpec,
+  })),
+};
+---
+<Base lang="uk" title={title} description={description} jsonLd={jsonLd}>
+  <Header slot="header" />
+  <Hero />
+  <Directions />
+  <FirstVisit />
+  <Doctors />
+  <Online />
+  <Reviews />
+  <Contacts />
+  <Fragment slot="footer">
+    <Footer />
+    <CallBar />
+  </Fragment>
+</Base>

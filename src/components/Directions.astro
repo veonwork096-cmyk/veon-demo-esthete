@@ -1,0 +1,36 @@
+---
+import Section from "./Section.astro";
+import Pic from "./Pic.astro";
+import FutureLink from "./FutureLink.astro";
+import { soon } from "../data/clinic";
+
+const items = [
+  { key: "micro", img: "dir-microscope", title: "Мікроскопна терапія й ендодонтія", text: "Лікування зубів і каналів під збільшенням, коли важлива кожна деталь.", alt: "Бінокулярні лупи стоматолога над долонею в кабінеті ЕСТЕТ", sizes: "(min-width: 1024px) 760px, 100vw" },
+  { key: "implant", img: "dir-implant", title: "Імплантологія й хірургія", text: "Відновлення втрачених зубів імплантами: від планування до встановлення.", alt: "Хірургічні наконечники та інструменти на стоматологічній установці", sizes: "(min-width: 1024px) 540px, 100vw" },
+  { key: "ortho", img: "dir-veneers", title: "Ортопедія й вініри", text: "Протезування та вініри для тих, хто хоче відновити зуби й форму усмішки.", alt: "Усмішка пацієнта крупним планом після відновлення зубів", sizes: "(min-width: 1024px) 870px, 100vw" },
+  { key: "sleep", img: "dir-sedation", title: "Лікування в медикаментозному сні", text: "Для тих, кому страшно в кріслі: лікування під седацією.", alt: "Лікар ЕСТЕТ тримає маску для седації", sizes: "(min-width: 1024px) 430px, 100vw" },
+  { key: "kids", img: "dir-kids", title: "Дитяча стоматологія SLYVOCHKA", text: "Окреме дитяче відділення для маленьких пацієнтів і їхніх батьків.", alt: "Дитячий стоматологічний кабінет зі сливою на стіні", sizes: "(min-width: 1024px) 650px, 100vw" },
+  { key: "lab", img: "dir-lab", title: "Власна зуботехнічна лабораторія", text: "Зуботехнічна лабораторія у складі комплексу, з фрезерним апаратом inLab MC X5.", alt: "Фрезерний апарат inLab MC X5 у зуботехнічній лабораторії ЕСТЕТ", sizes: "(min-width: 1024px) 650px, 100vw" },
+] as const;
+---
+<Section id="directions" class="section directions" rec="R-307,R-407">
+  <div class="container">
+    <div class="section__head">
+      <h2>Шість напрямів: від мікроскопа до власної лабораторії</h2>
+    </div>
+    <ul class="directions__grid" role="list">
+      {items.map((it) => (
+        <li class:list={["dir-card", `dir-card--${it.key}`]} data-rec={it.key === "kids" ? "R-408" : undefined} data-reveal="photo">
+          <figure class="dir-card__media" data-clip>
+            <Pic name={it.img} alt={it.alt} sizes={it.sizes} />
+          </figure>
+          <div class="dir-card__body">
+            <h3 class="dir-card__title">{it.title}</h3>
+            <p class="dir-card__text">{it.text}</p>
+            <FutureLink note={soon} class="dir-card__more">Детальніше</FutureLink>
+          </div>
+        </li>
+      ))}
+    </ul>
+  </div>
+</Section>

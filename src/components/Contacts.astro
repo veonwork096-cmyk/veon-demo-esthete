@@ -1,0 +1,44 @@
+---
+import Section from "./Section.astro";
+import Icon from "./Icon.astro";
+import { addresses, email, hours, phone } from "../data/clinic";
+---
+<Section id="contacts" class="section contacts">
+  <div class="container contacts__grid">
+    <div class="contacts__main">
+      <h2>Дві адреси в Ужгороді</h2>
+      <ul class="contacts__places" role="list" data-rec="R-306">
+        {addresses.map((a) => (
+          <li class="place">
+            <h3 class="place__street">{a.street}</h3>
+            <p class="place__city">{a.city}</p>
+            <p class="place__hours"><Icon name="clock" size={20} />{hours}</p>
+            <a class="link" href={a.map} rel="noopener" target="_blank" data-rec="R-109"><Icon name="pin" size={20} />Відкрити на карті<span class="visually-hidden"> (Google Maps, нова вкладка)</span></a>
+          </li>
+        ))}
+      </ul>
+      <p class="contacts__kids">Адресу дитячого відділення SLYVOCHKA уточніть за телефоном.</p>
+      <div class="contacts__direct">
+        <a class="btn btn--primary" href={phone.href} data-rec="R-301,R-404"><Icon name="phone" />Записатися за телефоном</a>
+        <div class="contacts__lines">
+          <a class="contacts__phone tnum" href={phone.href}>{phone.label}</a>
+          <a class="link" href={email.href}><Icon name="mail" size={20} />{email.label}</a>
+        </div>
+      </div>
+    </div>
+
+    <form class="request" aria-labelledby="request-title" onsubmit="return false" novalidate>
+      <h3 id="request-title" class="request__title">Залишити заявку</h3>
+      <div class="field">
+        <label for="req-name">Ім'я</label>
+        <input id="req-name" name="name" type="text" autocomplete="name" />
+      </div>
+      <div class="field">
+        <label for="req-phone">Телефон</label>
+        <input id="req-phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" />
+      </div>
+      <button class="btn btn--block" type="button" aria-disabled="true" aria-describedby="request-hint">Надіслати заявку</button>
+      <p id="request-hint" class="request__hint">Онлайн-заявка з'явиться в повній версії сайту. Зараз запишіться за телефоном <a href={phone.href}>{phone.label}</a>.</p>
+    </form>
+  </div>
+</Section>

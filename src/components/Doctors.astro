@@ -1,0 +1,71 @@
+---
+import Section from "./Section.astro";
+import Pic from "./Pic.astro";
+import Icon from "./Icon.astro";
+import FutureLink from "./FutureLink.astro";
+import { socials, soon } from "../data/clinic";
+
+// Names and roles: concept.md (doctors), /specialisti/ 2026-11-20; head doctor — C-008.
+const team = [
+  { img: "doc-roziuk", name: "Розюк Ігор", role: "Лікар-ендодонтист" },
+  { img: "doc-stoika", name: "Стойка Василь", role: "Лікар-ортодонт" },
+  { img: "doc-levkulych", name: "Левкулич Яна", role: "Дитячий лікар-стоматолог" },
+] as const;
+const instagram = socials[0];
+---
+<Section id="doctors" class="section doctors">
+  <div class="container">
+    <div class="section__head">
+      <h2>Хто вас лікуватиме</h2>
+    </div>
+
+    <div class="doctors__team-wrap" data-reveal="photo">
+      <figure class="doctors__team" data-clip>
+        <Pic name="team" alt="Команда стоматологічного комплексу ЕСТЕТ у темно-синій формі" sizes="(min-width: 1320px) 1272px, 100vw" />
+      </figure>
+    </div>
+
+    <div class="doctors__people">
+      <article class="doctor doctor--lead">
+        <Pic name="doc-slyvka" class="doctor__photo" alt="Сливка Михайло, головний лікар ЕСТЕТ" sizes="(min-width: 1024px) 400px, 100vw" />
+        <h3 class="doctor__name">Сливка Михайло</h3>
+        <p class="doctor__role">Головний лікар, хірург-стоматолог</p>
+      </article>
+      <div class="doctors__strip" role="region" aria-label="Лікарі клініки" tabindex="0">
+        <ul class="doctors__list" role="list">
+          {team.map((d) => (
+            <li class="doctor">
+              <Pic name={d.img} class="doctor__photo" alt={`${d.name}, ${d.role.toLowerCase()}`} sizes="(min-width: 1024px) 260px, 62vw" />
+              <h3 class="doctor__name">{d.name}</h3>
+              <p class="doctor__role">{d.role}</p>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+
+    <div class="works">
+      <h3 class="works__title">Роботи клініки: до і після</h3>
+      <div class="works__grid">
+        <figure class="work">
+          <Pic name="work-veneers" alt="Вініри: зуби до і після лікування в ЕСТЕТ, чотири знімки" sizes="(min-width: 1024px) 480px, 100vw" />
+          <figcaption>Вініри, до і після</figcaption>
+        </figure>
+        <figure class="work work--tall">
+          <Pic name="work-implant" alt="Імплантація: стан до лікування, рентгенівські знімки імплантів і результат" sizes="(min-width: 1024px) 260px, 100vw" />
+          <figcaption>Імплантація: до, рентген-контроль і після</figcaption>
+        </figure>
+        <figure class="work">
+          <Pic name="work-implant-2" alt="Імплантація: зуби пацієнта до лікування і після" sizes="(min-width: 1024px) 480px, 100vw" />
+          <figcaption>Імплантація, до і після</figcaption>
+        </figure>
+      </div>
+    </div>
+
+    <div class="doctors__links">
+      <a class="link" href={instagram.href} rel="noopener" target="_blank"><Icon name="instagram" />Роботи в Instagram<span class="visually-hidden"> (відкриється в новій вкладці)</span></a>
+      <FutureLink note={soon}>Всі лікарі</FutureLink>
+      <FutureLink note={soon}>Всі роботи</FutureLink>
+    </div>
+  </div>
+</Section>

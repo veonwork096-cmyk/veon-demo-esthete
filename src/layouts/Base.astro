@@ -1,0 +1,44 @@
+---
+import "../styles/tokens.css";
+import "../styles/global.css";
+import "../styles/site.css";
+import "../styles/sections.css";
+import { asset } from "../data/clinic";
+
+interface Props { lang: string; title: string; description: string; canonical?: string; jsonLd?: object; }
+const { lang, title, description, canonical, jsonLd } = Astro.props;
+---
+<!doctype html>
+<html lang={lang}>
+  <head>
+    <meta charset="utf-8" />
+    <script is:inline>document.documentElement.classList.add("js")</script>
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title data-rec="R-102">{title}</title>
+    <meta name="description" content={description} data-rec="R-102" />
+    {canonical && <link rel="canonical" href={canonical} />}
+    <meta name="robots" content="noindex, nofollow" />
+    <meta name="theme-color" content="#FFFFFF" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="uk_UA" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <link rel="icon" type="image/png" href={asset("/favicon.png")} />
+    <link rel="apple-touch-icon" href={asset("/apple-touch-icon.png")} />
+    <link rel="preload" href={asset("/fonts/geologica-cyrillic-wght-normal.woff2")} as="font" type="font/woff2" crossorigin />
+    {jsonLd && <script type="application/ld+json" data-rec="R-107" set:html={JSON.stringify(jsonLd)} />}
+    <slot name="head" />
+  </head>
+  <body id="top">
+    <a class="skip-link" href="#main">{lang.startsWith("uk") ? "До змісту" : lang.startsWith("ru") ? "К содержанию" : "Skip to content"}</a>
+    <slot name="header" />
+    <main id="main" tabindex="-1"><slot /></main>
+    <slot name="footer" />
+    <script src="../scripts/reveal.ts"></script>
+    <script src="../scripts/ui.ts"></script>
+  </body>
+</html>
+<style is:global>
+  /* Repeated from global.css so the layout reads as clipped on its own (Floor 4). */
+  html, body { overflow-x: clip; }
+</style>

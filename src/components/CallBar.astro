@@ -1,0 +1,9 @@
+---
+// Phone bar under 768px: appears after the hero (ui.ts), never covers content (body gets bottom padding).
+import Icon from "./Icon.astro";
+import { phone } from "../data/clinic";
+---
+<div class="callbar" data-callbar data-rec="R-301,R-404">
+  <a class="btn btn--primary" href={phone.href}><Icon name="phone" size={20} class="callbar__icon" />Подзвонити</a>
+  <a class="btn btn--outline callbar__second" href="#online">Онлайн-консультація</a>
+</div>

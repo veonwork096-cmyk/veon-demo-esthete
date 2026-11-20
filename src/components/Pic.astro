@@ -1,0 +1,32 @@
+---
+// Responsive client photo: AVIF + WebP sources with srcset from public/images (scripts/images.mjs).
+import manifest from "../data/images.json";
+import { asset } from "../data/clinic";
+
+type Name = keyof typeof manifest;
+interface Props {
+  name: Name;
+  alt: string;
+  sizes: string;
+  class?: string;
+  eager?: boolean;
+  priority?: boolean;
+}
+const { name, alt, sizes, class: cls, eager = false, priority = false } = Astro.props;
+const { widths, ratio } = manifest[name] as { widths: number[]; ratio: number };
+const max = Math.max(...widths);
+const set = (ext: string) => widths.map((w) => `${asset(`/images/${name}-${w}.${ext}`)} ${w}w`).join(", ");
+---
+<picture class={cls}>
+  <source type="image/avif" srcset={set("avif")} sizes={sizes} />
+  <source type="image/webp" srcset={set("webp")} sizes={sizes} />
+  <img
+    src={asset(`/images/${name}-${max}.webp`)}
+    alt={alt}
+    width={max}
+    height={Math.round(max * ratio)}
+    loading={eager || priority ? "eager" : "lazy"}
+    decoding={priority ? "sync" : "async"}
+    fetchpriority={priority ? "high" : undefined}
+  />
+</picture>

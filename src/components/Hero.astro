@@ -1,0 +1,46 @@
+---
+import Section from "./Section.astro";
+import Lens from "./Lens.astro";
+import Icon from "./Icon.astro";
+import { phone, addresses } from "../data/clinic";
+---
+<Section id="hero" class="hero" rec="R-303,R-406">
+  <div class="container hero__grid">
+    <div class="hero__copy">
+      <h1 class="hero__title" data-rec="R-101">Мікроскопна стоматологія та імплантація в Ужгороді</h1>
+      <p class="hero__lead">Інженерія усмішки під збільшенням: діагностика на КПКТ, лікування під мікроскопом і роботи власної зуботехнічної лабораторії — в одному комплексі ЕСТЕТ.</p>
+      <div class="hero__actions">
+        <a class="btn btn--primary" href={phone.href} data-rec="R-301,R-404"><Icon name="phone" />Записатися за телефоном</a>
+        <a class="btn btn--outline" href="#online" data-rec="R-302">Онлайн-консультація з ЄС</a>
+      </div>
+      <a class="hero__number" href={phone.href}>{phone.label}</a>
+      <dl class="hero__trust" data-rec="R-406">
+        <div class="hero__trust-item">
+          <dt class="visually-hidden">Рейтинг у Google</dt>
+          <dd><span class="hero__score">4,9</span> з 5 у Google, 378 відгуків</dd>
+        </div>
+        <div class="hero__trust-item">
+          <dt class="visually-hidden">Адреси</dt>
+          <dd><Icon name="pin" size={20} />Ужгород: {addresses[0].street} і {addresses[1].street}</dd>
+        </div>
+      </dl>
+    </div>
+    <div class="hero__lenses">
+      <Lens
+        name="hero-microscope"
+        class="lens--hero"
+        alt="Лікарка ЕСТЕТ дивиться в окуляр стоматологічного мікроскопа"
+        sizes="(min-width: 1024px) 540px, 78vw"
+        priority
+      />
+      <Lens
+        name="hero-veneer"
+        class="lens--small"
+        arcs={false}
+        alt="Вінір у пінцеті зубного техніка, крупний план"
+        sizes="(min-width: 1024px) 200px, 38vw"
+        eager
+      />
+    </div>
+  </div>
+</Section>

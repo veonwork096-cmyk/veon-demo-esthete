@@ -1,0 +1,44 @@
+---
+import Section from "./Section.astro";
+import Lens from "./Lens.astro";
+import Icon from "./Icon.astro";
+import FutureLink from "./FutureLink.astro";
+import { emailOnline, messengers, phone, soon } from "../data/clinic";
+
+// C-013 (Instagram bio): patients from the EU, personal curator, online consultation with a treatment plan. Messengers — C-041.
+const steps = [
+  { title: "Онлайн-консультація", text: "Консультація онлайн, за якою ви отримуєте план лікування." },
+  { title: "Приїзд на лікування", text: "Ви приїжджаєте до Ужгорода вже з планом на руках." },
+  { title: "Персональний куратор", text: "Пацієнтів з ЄС супроводжує персональний куратор." },
+];
+---
+<Section id="online" class="section online on-dark" rec="R-302">
+  <div class="container online__grid">
+    <Lens name="online" class="lens--online" alt="Команда ЕСТЕТ робить спільне селфі на телефон у клініці" sizes="(min-width: 1024px) 400px, 72vw" reveal />
+    <div class="online__copy">
+      <h2>Живете в ЄС? Почніть з онлайн-консультації</h2>
+      <ol class="online__steps" role="list">
+        {steps.map((s, i) => (
+          <li class="online__step">
+            <span class="online__num tnum" aria-hidden="true">{i + 1}</span>
+            <div>
+              <h3 class="online__step-title">{s.title}</h3>
+              <p>{s.text}</p>
+            </div>
+          </li>
+        ))}
+      </ol>
+      <div class="online__actions">
+        <a class="btn btn--light" href={emailOnline.href} data-rec="R-301"><Icon name="mail" />Написати на e-mail</a>
+        <ul class="online__messengers" role="list" aria-label="Месенджери клініки">
+          {messengers.map((m) => (
+            <li><a class="btn btn--ghost-light btn--sm" href={m.href} rel="noopener"><Icon name={m.icon} size={20} />{m.name}</a></li>
+          ))}
+        </ul>
+      </div>
+      <p class="online__phone">Або телефонуйте: <a href={phone.href}>{phone.label}</a></p>
+      <p class="online__note">Сайт поки що українською — напишіть нам, і ми відповімо.</p>
+      <FutureLink note={soon}>Детальніше про онлайн-консультацію</FutureLink>
+    </div>
+  </div>
+</Section>

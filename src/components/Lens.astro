@@ -1,0 +1,24 @@
+---
+// Signature «лінза»: the only round shape on the page, ringed by the logo arcs, always a real detail of the work.
+import Pic from "./Pic.astro";
+import Arcs from "./Arcs.astro";
+import manifest from "../data/images.json";
+
+interface Props {
+  name: keyof typeof manifest;
+  alt: string;
+  sizes: string;
+  class?: string;
+  arcs?: boolean;
+  priority?: boolean;
+  eager?: boolean;
+  reveal?: boolean;
+}
+const { name, alt, sizes, class: cls, arcs = true, priority = false, eager = false, reveal = false } = Astro.props;
+---
+<div class:list={["lens", cls]} data-reveal={reveal ? "lens" : undefined}>
+  {arcs && <Arcs class="lens__arcs" />}
+  <div class="lens__glass" data-clip>
+    <Pic name={name} alt={alt} sizes={sizes} class="lens__pic" priority={priority} eager={eager || priority} />
+  </div>
+</div>

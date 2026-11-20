@@ -1,0 +1,46 @@
+---
+import Icon from "./Icon.astro";
+import FutureLink from "./FutureLink.astro";
+import { addresses, asset, email, hours, phone, socials, soon } from "../data/clinic";
+
+const clinic = ["Про клініку", "Лабораторія", "Академія", "Блог", "Відео"];
+const docs = ["Договір публічної оферти", "Політика конфіденційності"];
+---
+<footer class="site-footer">
+  <div class="container site-footer__grid">
+    <div class="site-footer__brand">
+      <a class="logo logo--footer" href="#top" aria-label="ЕСТЕТ — на початок сторінки">
+        <img src={asset("/images/logo-384.png")} srcset={`${asset("/images/logo-384.png")} 384w, ${asset("/images/logo-768.png")} 768w`} sizes="200px" alt="ЕСТЕТ — інноваційний стоматологічний комплекс" width="384" height="96" decoding="async" />
+      </a>
+      <ul class="socials" role="list">
+        {socials.map((s) => (
+          <li><a class="icon-btn socials__link" href={s.href} rel="noopener" target="_blank"><Icon name={s.icon} /><span class="visually-hidden">{s.name} (нова вкладка)</span></a></li>
+        ))}
+      </ul>
+    </div>
+    <div class="site-footer__col">
+      <h2 class="site-footer__head">Контакти</h2>
+      <ul class="site-footer__list" role="list">
+        <li><a class="site-footer__link tnum" href={phone.href}>{phone.label}</a></li>
+        <li><a class="site-footer__link" href={email.href}>{email.label}</a></li>
+        {addresses.map((a) => <li>Ужгород, {a.street}</li>)}
+        <li>{hours}</li>
+      </ul>
+    </div>
+    <div class="site-footer__col">
+      <h2 class="site-footer__head">Клініка</h2>
+      <ul class="site-footer__list" role="list">
+        {clinic.map((c) => <li><FutureLink note={soon}>{c}</FutureLink></li>)}
+      </ul>
+    </div>
+    <div class="site-footer__col">
+      <h2 class="site-footer__head">Документи</h2>
+      <ul class="site-footer__list" role="list">
+        {docs.map((c) => <li><FutureLink note={soon}>{c}</FutureLink></li>)}
+      </ul>
+    </div>
+  </div>
+  <div class="container site-footer__bottom">
+    <p>© 2026 Стоматологічна клініка Естет</p>
+  </div>
+</footer>
